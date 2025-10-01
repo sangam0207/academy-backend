@@ -2,9 +2,9 @@
 import ErrorResponse from "../lib/error.res.js";
 import jwt from "jsonwebtoken";
 import { ENV } from "../configs/constant.js";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-const prisma=new PrismaClient()
+const prisma = new PrismaClient();
 class AuthService {
   #normalize(input) {
     const name = String(input?.name ?? "").trim();
