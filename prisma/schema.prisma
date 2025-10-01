@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+enum Plan {
+  BASIC
+  CHALLENGE
+  INTERNSHIP
+}
+
+enum OrderStatus {
+  CREATED
+  PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+// =============================
+// Models
+// =============================
+
+model User {
+  id       String  @id @default(cuid())
+  name     String
+  email    String  @unique
+  mobile   String  @unique
+
+  // Relations
+  orders     Order[]
+  purchase   Purchase?
+}
+
+model Order {
+  id                 String       @id @default(cuid())
+  userId             String
+  plan               Plan
+  amount             Int          // INR in paise
+  currency           String       // "INR"
+  receipt            String       @unique
+  razorpayOrderId    String       @unique
+  razorpayPaymentId  String?
+  razorpaySignature  String?
+  status             OrderStatus  @default(CREATED)
+  notes              Json?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  user               User         @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Purchase {
+  id        String   @id @default(cuid())
+  userId    String   @unique   
+  plan      Plan
+  boughtAt  DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
+

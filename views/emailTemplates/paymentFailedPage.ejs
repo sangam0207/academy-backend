@@ -1,0 +1,16 @@
+<!-- Header -->
+<td align="center" style="background: linear-gradient(135deg, #f43f5e, #be123c); padding: 30px 20px;">
+  <h2 style="margin:0;color:#ffffff;font-size:22px;font-weight:600;">⚠️ Payment Failed</h2>
+</td>
+
+<!-- Body -->
+<td align="left" style="padding:30px 25px;color:#333;font-size:15px;line-height:24px;">
+  <p>Hi <strong><%= userName %></strong>,</p>
+  <p>We attempted to process your payment for the <strong><%= planName %></strong> plan, but it was unsuccessful.</p>
+  <p>If any amount was deducted from your account, rest assured it will be automatically refunded within <strong>5 business days</strong>.</p>
+  <p>Please update your payment method to continue enjoying uninterrupted access to our service.</p>
+
+  <a href="<%= billingUrl %>" style="display:inline-block;padding:12px 28px;margin-top:20px;background-color:#ef4444;color:#ffffff;font-size:16px;text-decoration:none;border-radius:6px;">Update Payment Info</a>
+
+  <p style="margin-top:30px;">If you believe this was an error or need help, please <a href="mailto:support@example.com" style="color:#be123c;">contact our support team</a>.</p>
+</td>
