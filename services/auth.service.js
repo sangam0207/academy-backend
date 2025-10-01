@@ -2,7 +2,7 @@
 import ErrorResponse from "../lib/error.res.js";
 import jwt from "jsonwebtoken";
 import { ENV } from "../configs/constant.js";
-import { PrismaClient } from "../generated/prisma/index.js";
+import { PrismaClient } from "@prisma/client";
 
 const prisma=new PrismaClient()
 class AuthService {
