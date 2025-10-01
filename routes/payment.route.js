@@ -36,7 +36,7 @@ router.post("/verify", async (req, res) => {
     const result = await verifySignature({ razorpay_order_id, razorpay_payment_id, razorpay_signature });
 
     if (result.ok) {
-      return res.json({ success: true, redirect: process.env.FRONTEND_SUCCESS_URL || "/" });
+      return res.json({ success: true, redirect: process.env.FRONTEND_SUCCESS_URL || "https://miraspark-academy-workshop.vercel.app/success"});
     }
     return res.status(400).json({ success: false, redirect: process.env.FRONTEND_FAILURE_URL || "/" });
   } catch (err) {
